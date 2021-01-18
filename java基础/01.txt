@@ -9,14 +9,14 @@
 
 1.4 什么是值传递和引用传递？
 
-1.5Java 支持的数据类型有哪些？什么是自动拆装箱？
-
+1.5 Java 支持的数据类型有哪些？什么是自动拆装箱？
+	int、float、doubble、short、long、boolean、byte、char
 1.6 为什么会出现 4.0-3.6=0.40000001 这种现象？
-
+	doubble类型的数据在进行计算时因为是2进制计算，所以有时会损失精度，类似于10进制的10/3
 1.7java8 的新特性吗，请简单介绍一下
 	lambada表达式，函数式编程，stream，function，
 1.8 你说明符号“==”比较的是什么？
-
+	java中Obejct==比较的是基本类型的值，对象在内存中的位置
 1.9Object 若不重写 hashCode()的话，hashCode()如何计算出来的？
 
 1.10 为什么重写 equals 还要重写 hashcode？
