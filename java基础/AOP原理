@@ -1,0 +1,10 @@
+AOP 分为编译时增强（Aspect静态增强）和运行时增强（Spring AOC 动态增强）
+	编译时增强：引入特定的语法创建“方面”，从而使得编译器可以在编译期间织入有关“方面”的代码
+	运行时增强：采用拦截技术，对消息进行修饰，取代原有对象的执行
+	相关注解：
+	    通知方法：
+            前置通知(@Before)：logStart：在目标方法(div)运行之前运行
+            后置通知(@After)：logEnd：在目标方法(div)运行结束之后运行（无论方法正常结束还是异常结束）
+            返回通知(@AfterReturning)：logReturn：在目标方法(div)正常返回之后运行
+            异常通知(@AfterThrowing)：logException：在目标方法(div)出现异常以后运行
+            环绕通知(@Around)：动态代理，手动推进目标方法运行（joinPoint.procced()）
