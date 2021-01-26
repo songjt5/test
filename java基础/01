@@ -8,7 +8,7 @@
 1.3 数组(Array)和列表(ArrayList)的区别？什么时候应该使用 Array 而不是 ArrayList？
 	
 1.4 什么是值传递和引用传递？
-	
+	值传递就是传递参数的副本，常见的值传递都是基本类型，java对象的传递基本上都是传递的引用地址，就是引用传递
 1.5 Java 支持的数据类型有哪些？什么是自动拆装箱？
 	int、float、doubble、short、long、boolean、byte、char
 1.6 为什么会出现 4.0-3.6=0.40000001 这种现象？
@@ -25,7 +25,6 @@
 1.11 若对一个类不重写，它的 equals()方法是如何比较的？
 	基本类型对比的是值，引用类型对比的是引用对象在内存中的位置
 二、关键字
-
 2.1 Java 里面的 final 关键字是怎么用的？
 	final修饰的变量不能被修改，修饰的方法不能被重写，修饰的类不能被继承
 2.2 谈谈关于 Synchronized 和 lock
@@ -108,3 +107,14 @@ mysql查询时in索引字段时，还是走索引的，但是内容比较大的�
 	
 Spring bean初始化大致过程？初始化过程中怎么解决循环依赖的问题？
 	确定需要加载的bean
+
+@Scope 作用范围以及常用的集中注解值
+	1.singleton单例模式, 全局有且仅有一个实例
+	2.prototype原型模式, 每次获取Bean的时候会有一个新的实例
+	3.request, request表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP request内有效，
+	4.session, session作用域表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP session内有效
+	5.global, session global session作用域类似于标准的HTTP Session作用域，不过它仅仅在基于portlet的web应用中才有意义。Portlet规范定义了全局Session的概念，
+		它被所有构成某个 portlet web应用的各种不同的portlet所共享。在global session作用域中定义的bean被限定于全局portlet Session的生命周期范围内。
+		如果你在web中使用global session作用域来标识bean，那么web会自动当成session类型来使用
+	
+	
