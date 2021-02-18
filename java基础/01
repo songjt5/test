@@ -117,4 +117,4 @@ Spring bean初始化大致过程？初始化过程中怎么解决循环依赖的
 		它被所有构成某个 portlet web应用的各种不同的portlet所共享。在global session作用域中定义的bean被限定于全局portlet Session的生命周期范围内。
 		如果你在web中使用global session作用域来标识bean，那么web会自动当成session类型来使用
 	
-	
+TCP/IP协议，是面向连接、的可靠的基于字节流的传输层通信协议。socket	
