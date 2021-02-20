@@ -105,9 +105,17 @@ B+树、B树、红黑树、AVL树、二叉树、平衡二叉树
 	可以降低树的高度。
 mysql查询时in索引字段时，还是走索引的，但是内容比较大的时候基本上就会进行权标扫描了	
 	
-Spring bean初始化大致过程？初始化过程中怎么解决循环依赖的问题？
-	确定需要加载的bean
-
+Spring bean初始化过程中怎么解决循环依赖的问题？
+	通过三级缓存解决循环依赖的问题。
+	Spring中有三级缓存，分别如下
+		singletonObjects：完成初始化的单例对象的cache（一级缓存）
+		earlySingletonObjects ：完成实例化但是尚未初始化的，提前暴光的单例对象的Cache （二级缓存）
+		singletonFactories ： 进入实例化阶段的单例对象工厂的cache （三级缓存）
+	获取bean的流程就是从一级到三级一次寻找这个bean。
+不能解决的循环依赖的类型
+	1：构造器依赖
+	2：原型类型的循环依赖
+		
 @Scope 作用范围以及常用的集中注解值
 	1.singleton单例模式, 全局有且仅有一个实例
 	2.prototype原型模式, 每次获取Bean的时候会有一个新的实例
@@ -118,3 +126,28 @@ Spring bean初始化大致过程？初始化过程中怎么解决循环依赖的
 		如果你在web中使用global session作用域来标识bean，那么web会自动当成session类型来使用
 	
 TCP/IP协议，是面向连接、的可靠的基于字节流的传输层通信协议。socket	
+
+依赖注入（DI）：
+	依赖的对象通过构造函数、工厂方法参数或者属性注入，当对象实例化后依赖的对象会被创建，创建bean后容器注入这些依赖的对象
+
+@Bean 表示一个方法实例化、配置或者初始化一个Spring IoC容器管理的新对象
+@Controller	表明被注解的类是控制component，主要用于展现层
+@Service 表示被注解的类是位于业务层的业务
+@Repository 用于持久层，主要是数据库存储
+@Component 被@Component注解的类会被component扫描
+
+ConcurrentHashMap 在 put一个数据时的处理的具体流程
+	1、计算要 put 的 key 的位置，获取指定位置的 Segmen
+	2、如果指定位置的 Segment 为空，则初始化这个 Segment
+	初始化segment的流程：
+		1、检查计算得到的位置的 Segment 是否为null.
+		2、为 null 继续初始化，使用 Segment[0] 的容量和负载因子创建一个 HashEntry 数组。
+		3、再次检查计算得到的指定位置的 Segment 是否为null.
+		4、使用创建的 HashEntry 数组初始化这个 Segment.
+		5、自旋判断计算得到的指定位置的 Segment 是否为null，使用 CAS 在这个位置赋值为 Segment
+	3、Segment.put 插入 key,value 值
+	由于 Segment 继承了 ReentrantLock，所以 Segment 内部可以很方便的获取锁，put 流程就用到了这个功能
+		1、tryLock() 获取锁，获取不到使用 scanAndLockForPut 方法继续获取。
+		2、计算 put 的数据要放入的 index 位置，然后获取这个位置上的 HashEntry 
+	jdk1.7segment数组 + HashEntry数组 + 链表	
+	jdk1.8之后采用node数组 + 链表/红黑树	
