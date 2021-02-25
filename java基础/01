@@ -1,12 +1,10 @@
 一、java 基础
-
 1.1 请你说明 String 和 StringBuffer 的区别
 	String是final修饰，每次修改都会重新创建一个新的对象
 	StringBuffer可预先分配指定长度的存块建立一个字符串缓冲区。这样使用StringBuffer类的append方法追加字符比String使用 + 操作符添加字符到一个已经存在的字符串后面有效率得多
 1.2 请你说明一下 int 和 Integer 有什么区别
     在java中Integer是int的包装类，int是基本类型，Integer是在对内存中存在的对象
-1.3 数组(Array)和列表(ArrayList)的区别？什么时候应该使用 Array 而不是 ArrayList？
-	
+1.3 数组(Array)和列表(ArrayList)的区别？什么时候应该使用 Array 而不是 ArrayList？	
 1.4 什么是值传递和引用传递？
 	值传递就是传递参数的副本，常见的值传递都是基本类型，java对象的传递基本上都是传递的引用地址，就是引用传递
 1.5 Java 支持的数据类型有哪些？什么是自动拆装箱？
@@ -24,6 +22,8 @@
 	就会在hashmap中存储相同的key值（map中key值不能相同），这就不符合条件了。
 1.11 若对一个类不重写，它的 equals()方法是如何比较的？
 	基本类型对比的是值，引用类型对比的是引用对象在内存中的位置
+1.12 面向对象的特点？
+	抽象   继承  多态
 二、关键字
 2.1 Java 里面的 final 关键字是怎么用的？
 	final修饰的变量不能被修改，修饰的方法不能被重写，修饰的类不能被继承
@@ -121,7 +121,7 @@ Spring bean初始化过程中怎么解决循环依赖的问题？
 	2.prototype原型模式, 每次获取Bean的时候会有一个新的实例
 	3.request, request表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP request内有效，
 	4.session, session作用域表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP session内有效
-	5.global, session global session作用域类似于标准的HTTP Session作用域，不过它仅仅在基于portlet的web应用中才有意义。Portlet规范定义了全局Session的概念，
+	5.global, session global session作用域类似于标准的	HTTP Session作用域，不过它仅仅在基于portlet的web应用中才有意义。Portlet规范定义了全局Session的概念，
 		它被所有构成某个 portlet web应用的各种不同的portlet所共享。在global session作用域中定义的bean被限定于全局portlet Session的生命周期范围内。
 		如果你在web中使用global session作用域来标识bean，那么web会自动当成session类型来使用
 	
@@ -151,3 +151,14 @@ ConcurrentHashMap 在 put一个数据时的处理的具体流程
 		2、计算 put 的数据要放入的 index 位置，然后获取这个位置上的 HashEntry 
 	jdk1.7segment数组 + HashEntry数组 + 链表	
 	jdk1.8之后采用node数组 + 链表/红黑树	
+
+事务的隔离机制有哪些？
+事务隔离级别					脏读	不可重复读	幻读
+读未提交（read-uncommitted）	是			是		是
+不可重复读（read-committed）	否			是		是
+可重复读（repeatable-read）		否			否		是
+串行化（serializable）			否			否		否
+	
+	
+	
+	
