@@ -15,4 +15,18 @@ HashMap的加载因子为什么是0.75？
 	当哈希表中的条目数超过了加载因子与当前容量的积时，需要对哈希表进行扩容、rehash操作（重组其内部结构），扩容后的哈希表将具有两倍的容量
 	加载因子过低，例如0.5，可以减少查询时间成本，但是空间利用率很低，同时会提高rehash的次数
 	选择0.75作为默认的加载因子，完全是时间和空间成本上寻求的一种折中选择
-	
+ConcurrentHashMap 在 put一个数据时的处理的具体流程
+	1、计算要 put 的 key 的位置，获取指定位置的 Segmen
+	2、如果指定位置的 Segment 为空，则初始化这个 Segment
+	初始化segment的流程：
+		1、检查计算得到的位置的 Segment 是否为null.
+		2、为 null 继续初始化，使用 Segment[0] 的容量和负载因子创建一个 HashEntry 数组。
+		3、再次检查计算得到的指定位置的 Segment 是否为null.
+		4、使用创建的 HashEntry 数组初始化这个 Segment.
+		5、自旋判断计算得到的指定位置的 Segment 是否为null，使用 CAS 在这个位置赋值为 Segment
+	3、Segment.put 插入 key,value 值
+	由于 Segment 继承了 ReentrantLock，所以 Segment 内部可以很方便的获取锁，put 流程就用到了这个功能
+		1、tryLock() 获取锁，获取不到使用 scanAndLockForPut 方法继续获取。
+		2、计算 put 的数据要放入的 index 位置，然后获取这个位置上的 HashEntry 
+	jdk1.7segment数组 + HashEntry数组 + 链表	
+	jdk1.8之后采用node数组 + 链表/红黑树		
