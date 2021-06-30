@@ -106,7 +106,7 @@ Spring bean初始化过程中怎么解决循环依赖的问题？
 		singletonObjects：完成初始化的单例对象的cache（一级缓存）
 		earlySingletonObjects ：完成实例化但是尚未初始化的，提前暴光的单例对象的Cache （二级缓存）
 		singletonFactories ： 进入实例化阶段的单例对象工厂的cache （三级缓存）
-	获取bean的流程就是从一级到三级一次寻找这个bean。
+	获取bean的流程就是从一级到三级依次寻找这个bean。
 不能解决的循环依赖的类型
 	1：构造器依赖
 	2：原型类型的循环依赖
