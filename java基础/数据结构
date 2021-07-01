@@ -22,3 +22,13 @@
         主要根据集合的特点来选用，比如我们需要根据键值获取到元素值时就选用 Map 接口下的集合，需要排序时选择 TreeMap,不需要排序时就选择 HashMap,需要保证线程安全就选用 ConcurrentHashMap。
         当我们只需要存放元素值时，就选择实现Collection 接口的集合，需要保证元素唯一时选择实现 Set 接口的集合比如 TreeSet 或 HashSet，不需要就选择实现 List 接口的比如 ArrayList 或 LinkedList，然后再根据实现这些接口的集合的特点来选用。
     1.1.5 为什么要使用集合？
+
+Arrays.asList()使用注意点
+	1、Arrays.asList()的元素为对象，如果传入基本类型，那么整合数组就会被当成是一个对象，调用集合的add(),remove(),clear()会抛出异常
+		如果需要传入基本类型可以传入基本类型的封装对象.
+Collection.toArray()方法,如果toArray方法中没有传递任何参数的话返回的是Object类型数组
+不要在foreach循环里面进行元素的remove/add操作	
+	如果要进行remove操作，可以调用迭代器的 remove 方法而不是集合类的 remove 方法。
+	因为如果列表在任何时间从结构上修改创建迭代器之后，以任何方式除非通过迭代器自身remove/add方法，
+	迭代器都将抛出一个ConcurrentModificationException,这就是单线程状态下产生的 fail-fast 机制。
+	

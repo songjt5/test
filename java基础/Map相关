@@ -7,7 +7,13 @@ hashMap扩容机制（由数组扩容到链表）
 hashMap允许key和value为空，hashTable不允许
 为什么hashMap是线程不安全的，currentHashMap是线程安全的？
 	HashMap的底层存储结构，HashMap底层是一个Entry数组，一旦发生Hash冲突的的时候，HashMap采用拉链法解决碰撞冲突，就是扩容为链表
-	导致hashMap线程不安全的场景：
+	导致hashMap线程不安全的场景：put数据时候导致的多线程数据不一致
+		例: 线程A 希望插入一个数据到HashMap中,计算得出落到的桶的位置,然后获取到该聊表头节点,但是此时线程A的时间片用完了,线程B执行,并且成功将数据put,当线程A再次被执行就会覆盖线程A的插入记录
+		jdk1.7高并发的扩容场景采用的是头插法,会导致扩容死锁,1.8之后采用的是尾插法
+	ConcurrentHashMap 线程安全的原因:
+		ConcurrentHashMap数据结构HashEntry和Segment
+		ConcurrentHashMap支持允许多个修改同时并发进行,采用Segment分段锁功能，每一个Segment 都想的于小的hash table并且都有自己锁，只要修改不再同一个段上就不会引起并发问题.
+		Segment是一种可重入锁,继承了ReentrantLock
 HashMap的加载因子为什么是0.75？
 	HashMap的初始容量是16，扩容方式为2N，加载因子为0.75。
 	原因是提高空间利用率和减少查询成本的折中，主要是 泊松分布，0.75的话碰撞最小.
@@ -29,4 +35,5 @@ ConcurrentHashMap 在 put一个数据时的处理的具体流程
 		1、tryLock() 获取锁，获取不到使用 scanAndLockForPut 方法继续获取。
 		2、计算 put 的数据要放入的 index 位置，然后获取这个位置上的 HashEntry 
 	jdk1.7segment数组 + HashEntry数组 + 链表	
-	jdk1.8之后采用node数组 + 链表/红黑树		
+	jdk1.8之后采用node数组 + 链表/红黑树
+	
