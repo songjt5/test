@@ -1,0 +1,4 @@
+记一次navicate下连接oracle数据库
+    navicate连接oracle需要安装一个压缩包，都需要去oracle官网下载 https://www.oracle.com/technetwork/topics/winx64soft-089540.html
+    解压后修改 mysql OCI地址
+    参考链接 https://blog.csdn.net/ha_123_qq/article/details/83826821?locationNum=6&fps=1
