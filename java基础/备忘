@@ -2,3 +2,10 @@
     navicate连接oracle需要安装一个压缩包，都需要去oracle官网下载 https://www.oracle.com/technetwork/topics/winx64soft-089540.html
     解压后修改 mysql OCI地址
     参考链接 https://blog.csdn.net/ha_123_qq/article/details/83826821?locationNum=6&fps=1
+记一次navicate连接高版本mysql连接不上的方法
+    ps：原因是mysql大于5.0版本之后的加密方式改变了，手动修改用户密码连接方式
+    本地登入musql命令行
+    1、运行修改加密方式  ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
+    2、修改密码         ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+    3、最后比忘记刷新    FLUSH PRIVILEGES;
+    原博客 https://www.cnblogs.com/shiysin/p/shiysin.html
