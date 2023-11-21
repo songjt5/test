@@ -1,0 +1,56 @@
+1、简单的 Aggregation 示例：
+GET /_search
+{
+    "aggs" : {
+        "group_by_field" : {
+            "terms" : { "field" : "field_name" }
+        }
+    }
+}
+这个示例使用了 "terms" Aggregation，它会按照指定的字段将数据分组，并计算每个组的文档数量。"group_by_field" 是聚合的名称，可以自由定义，用于后续引用。
+
+"terms"：按照给定的字段进行分组，并计算每个组的文档数量。可以用于计算平均值、总和等
+{
+  "aggs": {
+    "group_by_field": {
+      "terms": {
+        "field": "field_name"
+      }
+    }
+  }
+}
+
+"histogram"：按照给定的字段进行分组，并计算每个组在不同值范围内的文档数量。可以用于计算数据的分布情况。
+{
+  "aggs": {
+    "group_by_field": {
+      "histogram": {
+        "field": "field_name",
+        "interval": 100
+      }
+    }
+  }
+}
+
+"date_histogram"：按照给定的日期字段进行分组，并计算每个组在不同时间范围内的文档数量。可以用于分析时间序列数据
+{
+  "aggs": {
+    "group_by_time": {
+      "date_histogram": {
+        "field": "date_field",
+        "interval": "month"
+      }
+    }
+  }
+}
+
+"avg"：计算给定字段的平均值。可以用于计算每个分组的平均值或所有文档的平均值
+{
+  "aggs": {
+    "average_value": {
+      "avg": {
+        "field": "value_field"
+      }
+    }
+  }
+}
